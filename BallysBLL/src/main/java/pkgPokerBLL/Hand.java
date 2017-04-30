@@ -58,10 +58,9 @@ public class Hand {
 			hand = Hand.EvaluateHand(hand);
 		}
 
-		//	Figure out best hand
+		//	Find and return best hand
 		Collections.sort(ExplodedHands, Hand.HandRank);
-		
-		//	Return best hand.  
+	  
 		return ExplodedHands.get(0);
 	}
 
@@ -81,7 +80,7 @@ public class Hand {
 		Collections.sort(h.getCardsInHand());
 
 		// Another way to sort
-		// Collections.sort(h.getCardsInHand(), Card.CardRank);
+
 
 		HandScore hs = new HandScore();
 		try {

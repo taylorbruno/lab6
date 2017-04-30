@@ -195,11 +195,11 @@ public class GamePlay implements Serializable {
 		int[] iPos = null;
 		switch (iStartPosition) {
 		case 1:
-			int[] iPositions1 = new int[] { 2, 3, 4, 1 };
+			int[] iPositions1 = new int[] { 2,1 };
 			iPos = iPositions1;
 			break;
 		case 2:
-			int[] iPositions2 = new int[] { 3, 4, 1, 2 };
+			int[] iPositions2 = new int[] { 1,2 };
 			iPos = iPositions2;
 			break;
 		case 3:
@@ -223,7 +223,7 @@ public class GamePlay implements Serializable {
 				}
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
-			// Whoops! Asking for something beyond the size of the array
+			// Asking for something beyond the size of the array
 			iNextPosition = iOrder[0];
 		}
 
@@ -232,6 +232,14 @@ public class GamePlay implements Serializable {
 
 	public Player getPlayerByPosition(int iPlayerPosition) {
 		Player pl = null;
+		Iterator it = getGamePlayers().entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Player p = (Player) pair.getValue();
+			if (p.getiPlayerPosition()==iPlayerPosition){
+				pl=p;
+			}
+		}
 		return pl;
 	}
 

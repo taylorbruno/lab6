@@ -9,7 +9,6 @@ public class Table implements Serializable {
 
 	private UUID TableID;
 
-	// Change this from ArrayList to HashMap.
 	private HashMap<UUID, Player> hmPlayer = new HashMap<UUID, Player>();
 
 	public Table() {

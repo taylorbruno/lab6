@@ -28,6 +28,33 @@ public class Rule implements Serializable {
 		private ArrayList<Card> WildCards = new ArrayList<Card>();
 		private TreeMap hmCardDraw = new TreeMap<Integer, CardDraw>();
 		
+		public int getMaxNumberOfPlayers() {
+			return MaxNumberOfPlayers;
+		}
+
+		public int getPlayerNumberOfCards() {
+			return PlayerNumberOfCards;
+		}
+
+		public int getNumberOfJokers() {
+			return NumberOfJokers;
+		}
+
+		public ArrayList<Card> getWildCards() {
+			return WildCards;
+		}
+
+		public TreeMap getHmCardDraw() {
+			return hmCardDraw;
+		}
+
+		public LinkedList<CardDraw> getCardDraw() {
+			return CardDraw;
+		}
+
+		public eGame getGame() {
+			return Game;
+		}
 		private LinkedList<CardDraw> CardDraw = new LinkedList<CardDraw>();
 		private eGame Game;
 
