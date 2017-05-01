@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.function.Consumer;
-
 import javax.swing.SwingUtilities;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -79,23 +77,17 @@ public class MainApp extends Application {
 
 	@Override
 	public void init() throws Exception {
-		// INIT is executed by the Application framework FIRST
-		//connection.startConnection();
+
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		// START is executed by the Application framework after INIT
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root, 500, 500);
 
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Poker");
-
-		// Set the application icon.
-		//this.primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/26.png")));
-
 		this.primaryStage.setScene(scene);
 		this.primaryStage.show();
 
@@ -135,7 +127,7 @@ public class MainApp extends Application {
 
 	public void showClientServer() {
 		try {
-			// Load person overview.
+		
 			FXMLLoader loader = new FXMLLoader();
 			
 			loader =  new FXMLLoader(getClass().getResource("/poker/app/view/ClientServerStart.fxml"));
@@ -190,16 +182,11 @@ public class MainApp extends Application {
 
 	public void showPokerTable() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("/poker/app/view/PokerTable.fxml"));
 			BorderPane pokerOverview = (BorderPane) loader.load();
 
-			// Set person overview into the center of root layout.
 			rootLayout.setCenter(pokerOverview);
-
-			// Give the controller access to the main app.
-			//PokerTableController controller = loader.getController();
 			pokerController = loader.getController();
 			pokerController.setMainApp(this);
 			
@@ -233,8 +220,6 @@ public class MainApp extends Application {
 		act.setAction(eAction.Leave);
 		act.setPlayer(this.getPlayer());
 		this.messageSend(act);
-		
-		//connection.closeConnection();
 	}
 
 	public void messageSend(final Object message)
@@ -254,9 +239,7 @@ public class MainApp extends Application {
 			super(hubHostName, hubPort);
 		}
 
-		/*
-		 * messageSend - One single place to send messages
-		 */
+		
 		protected void messageSend(Object message)
 		{
 			System.out.println("Sending message from MainApp.Client");
@@ -264,13 +247,6 @@ public class MainApp extends Application {
 			super.send(message);
 		}
 		
-		/*
-		 * messageReceived will get an Object message... it's up to you to determine
-		 * what should happen to that the message.
-		 * 
-		 * If it's a Table, handle Table - level action
-		 * If it's a GamePlay, handle GamePlay - level action
-		 */
 		@Override
 		protected void messageReceived(final Object message) {
 			Platform.runLater(() -> {		
@@ -294,9 +270,7 @@ public class MainApp extends Application {
 		
 		
 		@Override
-		/*
-		 * serverShutdown - Call the hard exit.
-		 */
+
 	    protected void serverShutdown(String message) {
 	    	
 			Platform.runLater(() -> {		
@@ -304,7 +278,5 @@ public class MainApp extends Application {
 		        System.exit(0);
 			});
 	    }
-	
-
 	}
 }

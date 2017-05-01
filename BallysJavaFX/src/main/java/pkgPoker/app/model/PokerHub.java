@@ -41,9 +41,11 @@ public class PokerHub extends Hub {
 			shutdownServerSocket();
 		}
 	}
+
 	protected void playerDisconnected(int playerID) {
 		shutDownHub();
 	}
+
 	protected void messageReceived(int ClientID, Object message) {
 
 		if (message instanceof Action) {
@@ -65,10 +67,12 @@ public class PokerHub extends Hub {
 				sendToAll(HubPokerTable);
 				break;
 			case StartGame:
-		
+				// Get the rule from the Action object.
 				Rule rle = new Rule(act.geteGame());
 
-			
+				// TODO Lab #5 - If neither player has 'the button', pick a
+				// random player
+				// and assign the button.
 				HubGamePlay = new GamePlay(rle, act.getPlayer().getPlayerID());
 				Iterator it = HubPokerTable.getHmPlayer().entrySet().iterator();
 				while (it.hasNext()) {
@@ -104,21 +108,17 @@ public class PokerHub extends Hub {
 				HubGamePlay.setPlayerNextToAct(HubGamePlay.getPlayerByPosition(cPlayer.getiPlayerPosition()));
 				HubGamePlay.seteDrawCountLast(eDrawCount.geteDrawCount(c));
 
-				// Check to see if the game is over
+				
 				HubGamePlay.isGameOver();
 
 				resetOutput();
 				sendToAll(HubGamePlay);
 				break;
 			case ScoreGame:
-
 				resetOutput();
 				sendToAll(HubGamePlay);
 				break;
 			}
-
 		}
-
 	}
-
 }

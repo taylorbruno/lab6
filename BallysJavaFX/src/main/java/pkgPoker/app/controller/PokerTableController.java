@@ -31,6 +31,7 @@ import pkgPokerBLL.Table;
 
 public class PokerTableController implements Initializable {
 
+	// Reference to the main application.
 	private MainApp mainApp;
 
 	public PokerTableController() {
@@ -99,7 +100,7 @@ public class PokerTableController implements Initializable {
 	public void GetGameState() {
 	}
 
-
+	// TODO: Lab #4 - Complete (fix) setiPlayerPosition
 	public void btnSitLeave_Click(ActionEvent event) {
 
 		ToggleButton btn = (ToggleButton) event.getSource();
@@ -218,7 +219,13 @@ public class PokerTableController implements Initializable {
 	}
 
 	public void Handle_GameState(GamePlay HubPokerGame) {
-		
+		// TODO Lab #5 - Make sure to set the correct visiblity
+		//get last draw count, after that read every draw count from 1 to current draw count
+		//then, if destination is community, get how many cards are in the community hand 
+		//do geticardnmbr call BuildImage using that number
+		//if destination is a player, check if that player you 
+		//if you make it visible, if not you not visible (facedown, BuildImage based on card_back.png)
+		//do this for both players
 	}
 
 	private ImageView BuildImage(int iCardNbr) {
@@ -238,9 +245,10 @@ public class PokerTableController implements Initializable {
 		// Start the Game
 		Action act = new Action(eAction.StartGame, mainApp.getPlayer());
 
+		// figure out which game is selected in the menu
 		eGame gme = eGame.getGame(Integer.parseInt(mainApp.getRuleName().replace("PokerGame", "")));
 
-		// Set the game (gme) in the action
+		// Set the gme in the action
 		act.seteGame(gme);
 
 		// Send the Action to the Hub
@@ -250,9 +258,10 @@ public class PokerTableController implements Initializable {
 	@FXML
 	void btnDeal_Click(ActionEvent event) {
 
-		// new deal
+		// Set the new Deal action
 		Action act = new Action(eAction.Draw, mainApp.getPlayer());
 
+		// Send the Action to the Hub
 		mainApp.messageSend(act);
 
 	}
